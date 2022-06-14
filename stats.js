@@ -1,4 +1,5 @@
 const os = require('os');
+const log = require('./logger');
 
 const Stats = new function () {
     const { freemem, totalmem } = os;
@@ -34,9 +35,13 @@ const Stats = new function () {
 };
 
 setInterval(() => {
+    let stats = Stats.get();
+
     console.clear();
     console.log('PC Stats:');
-    console.table(Stats.get());
+    console.table(stats);
+
+    log(`${JSON.stringify(stats)}\n`);
 },
     1000
 );
